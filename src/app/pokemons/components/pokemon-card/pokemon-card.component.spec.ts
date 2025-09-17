@@ -33,7 +33,25 @@ describe('PokemonCardComponent', () => {
   });
 
   it('should create the app', () => {
-    console.log(compiled);
+    // console.log(compiled);
     expect(component).toBeTruthy();
   });
+
+  it('should have the SimplePokemon signal inputValue', () => {
+    expect(component.pokemon()).toEqual(mockPokemon);
+  });
+
+  it('should render the pokemon name and image correctly', () => {
+    const image = compiled.querySelector('img')!;
+    expect(image).toBeDefined();
+    const imageUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${mockPokemon.id}.png`
+    expect(image.src).toBe(imageUrl);
+    expect(compiled.textContent?.trim()).toBe(mockPokemon.name);
+  });
+
+  it('should have the proper ng-reflect-router-link', () => {
+    const link = compiled.querySelector('div');
+    expect(link?.attributes.getNamedItem('ng-reflect-router-link')?.value).toBe(`/pokemons,${mockPokemon.name}`);
+  });
+
 });
