@@ -1,6 +1,15 @@
-import { ApplicationRef, ChangeDetectionStrategy, Component, effect, inject, OnDestroy, OnInit, signal } from '@angular/core';
-import { PokemonListComponent } from "../../pokemons/components/pokemon-list/pokemon-list.component";
-import { PokemonListSkeletonComponent } from "./ui/pokemon-list-skeleton/pokemon-list-skeleton.component";
+import {
+  ApplicationRef,
+  ChangeDetectionStrategy,
+  Component,
+  effect,
+  inject,
+  OnDestroy,
+  OnInit,
+  signal,
+} from '@angular/core';
+import { PokemonListComponent } from '../../pokemons/components/pokemon-list/pokemon-list.component';
+import { PokemonListSkeletonComponent } from './ui/pokemon-list-skeleton/pokemon-list-skeleton.component';
 import { PokemonsService } from '../../pokemons/services/pokemons.service';
 import { SimplePokemon } from '../../pokemons/interfaces';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
@@ -15,7 +24,6 @@ import { Title } from '@angular/platform-browser';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class PokemonsPageComponent {
-
   // public currentName = signal('Marcelo');
 
   private pokemonsService = inject(PokemonsService);
@@ -34,8 +42,8 @@ export default class PokemonsPageComponent {
     this.route.params.pipe(
       map((params) => params['page'] ?? '1'),
       map((page) => (isNaN(+page) ? 1 : +page)),
-      map((page) => Math.max(1, page))
-    )
+      map((page) => Math.max(1, page)),
+    ),
   );
 
   public loadOnPageChange = effect(() => {
@@ -61,18 +69,18 @@ export default class PokemonsPageComponent {
   public loadPokemons(page = 0) {
     // const pageToLoad = this.currentPage()! + page;
 
-    this.pokemonsService.loadPage(page)
+    this.pokemonsService
+      .loadPage(page)
       .pipe(
         // tap(() => this.router.navigate([], { queryParams: { page: pageToLoad } })),
-        tap(() => this.title.setTitle(`Pokemons SSR - ${page}`))
+        tap(() => this.title.setTitle(`Pokemons SSR - ${page}`)),
       )
-      .subscribe(pokemons => {
+      .subscribe((pokemons) => {
         this.pokemons.set(pokemons);
-      })
+      });
   }
 
   // ngOnDestroy(): void {
   //   this.$appState.unsubscribe();
   // }
-
 }

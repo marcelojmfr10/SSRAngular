@@ -1,4 +1,3 @@
-
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { PokemonListComponent } from './pokemon-list.component';
 import { SimplePokemon } from '../../interfaces';
@@ -8,16 +7,14 @@ const mockPokemons: SimplePokemon[] = [
   {
     id: '1',
     name: 'bulbasaur',
-  }
-  ,
+  },
   {
     id: '2',
     name: 'ivysaur',
-  }
+  },
 ];
 
 describe('PokemonListComponent', () => {
-
   let fixture: ComponentFixture<PokemonListComponent>;
   let compiled: HTMLElement;
   let component: PokemonListComponent;
@@ -25,9 +22,7 @@ describe('PokemonListComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [PokemonListComponent],
-      providers: [
-        provideRouter([])
-      ]
+      providers: [provideRouter([])],
     }).compileComponents();
 
     fixture = TestBed.createComponent(PokemonListComponent);
@@ -45,12 +40,16 @@ describe('PokemonListComponent', () => {
     fixture.componentRef.setInput('pokemons', mockPokemons);
     fixture.detectChanges();
 
-    expect(compiled.querySelectorAll('pokemon-card').length).toBe(mockPokemons.length);
+    expect(compiled.querySelectorAll('pokemon-card').length).toBe(
+      mockPokemons.length,
+    );
   });
 
   it('should render "No hay pokémons"', () => {
     fixture.componentRef.setInput('pokemons', []);
     fixture.detectChanges();
-    expect(compiled.querySelector('div')?.textContent).toContain('No hay pokémons');
+    expect(compiled.querySelector('div')?.textContent).toContain(
+      'No hay pokémons',
+    );
   });
 });

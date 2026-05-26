@@ -5,14 +5,13 @@ import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { NavbarComponent } from './shared/components/navbar/navbar.component';
 
 describe('AppComponent', () => {
-
   let fixture: ComponentFixture<AppComponent>;
   let app: AppComponent;
   let compiled: HTMLDivElement;
 
   @Component({
     selector: 'app-navbar',
-    template: `<h1>Hola mundo</h1>`
+    template: `<h1>Hola mundo</h1>`,
   })
   class NavbarComponentMock {}
 
@@ -21,7 +20,7 @@ describe('AppComponent', () => {
       set: {
         imports: [NavbarComponentMock],
         schemas: [CUSTOM_ELEMENTS_SCHEMA],
-      }
+      },
     });
 
     // ! Recomendado

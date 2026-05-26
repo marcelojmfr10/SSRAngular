@@ -1,19 +1,15 @@
-import { TestBed } from "@angular/core/testing";
-import { provideRouter, Router } from "@angular/router";
-import { routes } from "./app.routes";
-import { Location } from "@angular/common";
-
+import { TestBed } from '@angular/core/testing';
+import { provideRouter, Router } from '@angular/router';
+import { routes } from './app.routes';
+import { Location } from '@angular/common';
 
 describe('App Routes', () => {
-
   let router: Router;
   let location: Location;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [
-        provideRouter(routes)
-      ]
+      providers: [provideRouter(routes)],
     });
 
     router = TestBed.inject(Router);
@@ -35,16 +31,17 @@ describe('App Routes', () => {
     expect(location.path()).toBe('/about');
   });
 
-  it('should load the proper component', async() => {
+  it('should load the proper component', async () => {
     const aboutRoute = routes.find((route) => route.path === 'about')!;
     expect(aboutRoute).toBeDefined();
-    const aboutComponent = await aboutRoute.loadComponent!() as any;
+    const aboutComponent = (await aboutRoute.loadComponent!()) as any;
     expect(aboutComponent.default.name).toBe('AboutPageComponent');
 
-    const pokemonPageRoute = routes.find((route) => route.path === 'pokemons/page/:page')!;
+    const pokemonPageRoute = routes.find(
+      (route) => route.path === 'pokemons/page/:page',
+    )!;
     expect(pokemonPageRoute).toBeDefined();
-    const pokemonComponent = await pokemonPageRoute.loadComponent!() as any;
+    const pokemonComponent = (await pokemonPageRoute.loadComponent!()) as any;
     expect(pokemonComponent.default.name).toBe('PokemonsPageComponent');
   });
-
-})
+});

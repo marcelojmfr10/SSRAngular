@@ -1,4 +1,10 @@
-import { ChangeDetectionStrategy, Component, computed, effect, input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  effect,
+  input,
+} from '@angular/core';
 import { SimplePokemon } from '../../interfaces';
 import { RouterLink } from '@angular/router';
 
@@ -9,15 +15,13 @@ import { RouterLink } from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PokemonCardComponent {
-
   public pokemon = input.required<SimplePokemon>();
   public readonly pokemonImage = computed(() => {
     return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${this.pokemon().id}.png`;
-  })
+  });
 
   // se dispara cada vez que cambia la señal
   // logEffect = effect(() => {
   //   console.log('pokemoncard: ', this.pokemon());
   // });
-
- }
+}
